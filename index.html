@@ -1,0 +1,468 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Pandaisia Beach Bar — Komi Beach, Chios</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,300;0,9..144,500;0,9..144,600;0,9..144,700;1,9..144,500&family=Work+Sans:wght@300;400;500;600&family=Space+Mono:wght@400;700&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --sea-deep:#0B3D4C;
+    --sea-mid:#12586B;
+    --sand:#F3ECD9;
+    --sand-soft:#EFE6CE;
+    --terracotta:#C1502E;
+    --resin:#7C8C4F;
+    --sun:#E8A93C;
+    --ink:#142B2E;
+    --white:#FDFBF6;
+    --radius:2px;
+  }
+  *{box-sizing:border-box;}
+  html{scroll-behavior:smooth;}
+  body{
+    margin:0;
+    background:var(--sand);
+    color:var(--ink);
+    font-family:'Work Sans',sans-serif;
+    font-weight:400;
+    line-height:1.6;
+    -webkit-font-smoothing:antialiased;
+  }
+  h1,h2,h3,.display{
+    font-family:'Fraunces',serif;
+    font-weight:600;
+    letter-spacing:-0.01em;
+    margin:0;
+  }
+  .eyebrow{
+    font-family:'Space Mono',monospace;
+    font-size:0.72rem;
+    letter-spacing:0.18em;
+    text-transform:uppercase;
+    color:var(--terracotta);
+    display:inline-flex;
+    align-items:center;
+    gap:0.6em;
+  }
+  .eyebrow::before{
+    content:'';
+    width:18px;height:1px;background:var(--terracotta);
+    display:inline-block;
+  }
+  a{color:inherit;text-decoration:none;}
+  img{max-width:100%;display:block;}
+  :focus-visible{outline:2px solid var(--terracotta);outline-offset:3px;}
+  .wrap{max-width:1140px;margin:0 auto;padding:0 28px;}
+  @media (prefers-reduced-motion: reduce){
+    *{animation-duration:0.001ms !important;transition-duration:0.001ms !important;}
+  }
+
+  /* ---------- XYSTA PATTERN (signature element) ---------- */
+  /* Inspired by the black-and-white sgraffito facades of Pyrgi, the village
+     just up the road from Komi beach — the region's most recognizable motif. */
+  .xysta{
+    height:34px;
+    width:100%;
+    background-image: repeating-linear-gradient(135deg, var(--ink) 0 10px, transparent 10px 20px),
+                       repeating-linear-gradient(45deg, var(--ink) 0 10px, transparent 10px 20px);
+    background-color:var(--sand);
+    background-size:28px 28px;
+    background-position:0 0, 0 0;
+    opacity:0.9;
+  }
+  .xysta.on-dark{background-color:var(--sea-deep);background-image:
+      repeating-linear-gradient(135deg, var(--sand) 0 10px, transparent 10px 20px),
+      repeating-linear-gradient(45deg, var(--sand) 0 10px, transparent 10px 20px);}
+
+  /* ---------- HEADER ---------- */
+  header{
+    position:sticky;top:0;z-index:50;
+    background:rgba(11,61,76,0.94);
+    backdrop-filter:blur(6px);
+    color:var(--sand);
+  }
+  .nav{
+    display:flex;align-items:center;justify-content:space-between;
+    padding:16px 28px;max-width:1140px;margin:0 auto;
+  }
+  .logo{
+    font-family:'Fraunces',serif;font-size:1.3rem;font-weight:700;
+    letter-spacing:0.01em;
+  }
+  .logo span{color:var(--sun);}
+  .navlinks{display:flex;gap:32px;font-size:0.95rem;}
+  .navlinks a{opacity:0.85;transition:opacity 0.2s;position:relative;}
+  .navlinks a:hover{opacity:1;}
+  .navbtn{
+    font-family:'Space Mono',monospace;font-size:0.78rem;
+    border:1px solid var(--sun);color:var(--sun);
+    padding:9px 16px;border-radius:var(--radius);
+    letter-spacing:0.05em;white-space:nowrap;
+  }
+  .navbtn:hover{background:var(--sun);color:var(--sea-deep);}
+  .menutoggle{display:none;background:none;border:none;color:var(--sand);font-size:1.6rem;cursor:pointer;}
+
+  /* ---------- HERO ---------- */
+  .hero{
+    position:relative;
+    background:radial-gradient(circle at 78% 18%, #2A7E8C 0%, var(--sea-mid) 32%, var(--sea-deep) 75%);
+    color:var(--sand);
+    padding:110px 0 60px;
+    overflow:hidden;
+  }
+  .sun{
+    position:absolute;top:-60px;right:8%;
+    width:220px;height:220px;border-radius:50%;
+    background:radial-gradient(circle, var(--sun) 0%, rgba(232,169,60,0.15) 70%, transparent 100%);
+    filter:blur(1px);
+  }
+  .hero-inner{position:relative;z-index:2;}
+  .hero .eyebrow{color:var(--sun);}
+  .hero .eyebrow::before{background:var(--sun);}
+  .hero h1{
+    font-size:clamp(3rem,8vw,6rem);
+    line-height:0.95;margin-top:18px;color:var(--white);
+  }
+  .hero h1 em{font-style:italic;color:var(--sun);font-weight:500;}
+  .hero-sub{
+    max-width:520px;margin-top:22px;font-size:1.15rem;color:var(--sand-soft);
+  }
+  .hero-ctas{display:flex;gap:14px;margin-top:34px;flex-wrap:wrap;}
+  .btn{
+    font-family:'Space Mono',monospace;font-size:0.82rem;letter-spacing:0.04em;
+    padding:14px 24px;border-radius:var(--radius);display:inline-block;
+    transition:transform 0.15s ease, background 0.2s;
+  }
+  .btn-primary{background:var(--terracotta);color:var(--white);}
+  .btn-primary:hover{transform:translateY(-2px);background:#a8431f;}
+  .btn-ghost{border:1px solid rgba(253,251,246,0.5);color:var(--sand);}
+  .btn-ghost:hover{background:rgba(253,251,246,0.1);}
+  .stat-row{
+    display:flex;gap:40px;margin-top:56px;flex-wrap:wrap;
+    border-top:1px solid rgba(253,251,246,0.18);padding-top:26px;
+  }
+  .stat b{display:block;font-family:'Fraunces',serif;font-size:1.9rem;color:var(--sun);}
+  .stat span{font-size:0.82rem;color:var(--sand-soft);font-family:'Space Mono',monospace;}
+  .wave{position:absolute;bottom:-1px;left:0;width:100%;line-height:0;z-index:1;}
+
+  /* ---------- SECTION GENERAL ---------- */
+  section{padding:86px 0;}
+  .section-head{max-width:640px;margin-bottom:48px;}
+  .section-head h2{font-size:clamp(2rem,4vw,2.8rem);margin-top:14px;}
+
+  /* ---------- ABOUT ---------- */
+  .about-grid{display:grid;grid-template-columns:1.1fr 0.9fr;gap:64px;align-items:start;}
+  .about-copy p{font-size:1.05rem;max-width:480px;}
+  .about-copy p + p{margin-top:16px;}
+  .about-figures{
+    background:var(--sea-deep);color:var(--sand);
+    padding:34px;border-radius:var(--radius);
+    display:grid;grid-template-columns:1fr 1fr;gap:26px;
+  }
+  .fig b{font-family:'Fraunces',serif;font-size:1.7rem;color:var(--sun);display:block;}
+  .fig span{font-size:0.82rem;color:var(--sand-soft);}
+
+  /* ---------- MENU ---------- */
+  .menu-tabs{display:flex;gap:10px;flex-wrap:wrap;margin-bottom:42px;}
+  .tab-btn{
+    font-family:'Space Mono',monospace;font-size:0.78rem;letter-spacing:0.03em;
+    padding:11px 18px;border:1px solid var(--ink);border-radius:var(--radius);
+    background:transparent;cursor:pointer;color:var(--ink);
+  }
+  .tab-btn.active{background:var(--ink);color:var(--sand);}
+  .menu-panel{display:none;}
+  .menu-panel.active{display:block;animation:fade 0.35s ease;}
+  @keyframes fade{from{opacity:0;transform:translateY(4px);}to{opacity:1;transform:translateY(0);}}
+  .menu-list{display:grid;grid-template-columns:1fr 1fr;gap:0 48px;}
+  .menu-item{
+    display:flex;justify-content:space-between;gap:16px;
+    padding:20px 0;border-bottom:1px solid rgba(20,43,46,0.15);
+  }
+  .menu-item h4{font-family:'Fraunces',serif;font-size:1.15rem;font-weight:600;margin:0;}
+  .menu-item p{margin:6px 0 0;font-size:0.9rem;color:#4b5d5f;max-width:280px;}
+  .menu-item .price{
+    font-family:'Space Mono',monospace;font-size:0.95rem;color:var(--terracotta);
+    white-space:nowrap;padding-top:2px;
+  }
+  .menu-note{
+    margin-top:30px;font-size:0.85rem;color:#5a6b6d;font-family:'Space Mono',monospace;
+    border-left:2px solid var(--terracotta);padding-left:14px;
+  }
+  @media (max-width:720px){.menu-list{grid-template-columns:1fr;}}
+
+  /* ---------- REVIEWS ---------- */
+  .reviews-strip{background:var(--sea-deep);color:var(--sand);}
+  .reviews-strip .eyebrow{color:var(--sun);}
+  .reviews-strip .eyebrow::before{background:var(--sun);}
+  .reviews-strip h2{color:var(--white);}
+  .review-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:24px;margin-top:44px;}
+  .review-card{
+    background:rgba(253,251,246,0.06);border:1px solid rgba(253,251,246,0.14);
+    padding:26px;border-radius:var(--radius);
+  }
+  .review-stars{color:var(--sun);font-family:'Space Mono',monospace;letter-spacing:0.1em;}
+  .review-card p{margin:14px 0 0;font-size:0.98rem;color:var(--sand-soft);font-style:italic;}
+  .review-card footer{margin-top:16px;font-family:'Space Mono',monospace;font-size:0.75rem;color:rgba(253,251,246,0.55);}
+  @media (max-width:820px){.review-grid{grid-template-columns:1fr;}}
+
+  /* ---------- VISIT ---------- */
+  .visit-grid{display:grid;grid-template-columns:0.9fr 1.1fr;gap:64px;}
+  .hours-table{width:100%;border-collapse:collapse;margin-top:20px;font-size:0.95rem;}
+  .hours-table td{padding:9px 0;border-bottom:1px solid rgba(20,43,46,0.12);}
+  .hours-table td:last-child{text-align:right;font-family:'Space Mono',monospace;font-size:0.85rem;}
+  .contact-list{list-style:none;margin:26px 0 0;padding:0;display:flex;flex-direction:column;gap:14px;}
+  .contact-list li{display:flex;gap:12px;align-items:baseline;font-size:0.98rem;}
+  .contact-list .lbl{font-family:'Space Mono',monospace;font-size:0.72rem;color:var(--terracotta);min-width:86px;letter-spacing:0.05em;}
+  .map-card{
+    background:var(--sea-deep);color:var(--sand);border-radius:var(--radius);
+    padding:36px;position:relative;overflow:hidden;min-height:340px;
+    display:flex;flex-direction:column;justify-content:space-between;
+  }
+  .map-card svg{position:absolute;inset:0;opacity:0.35;}
+  .map-card-content{position:relative;z-index:2;}
+  .pin{
+    width:34px;height:34px;border-radius:50% 50% 50% 0;background:var(--terracotta);
+    transform:rotate(-45deg);margin-bottom:18px;
+  }
+
+  footer{background:var(--ink);color:var(--sand-soft);padding:48px 0 30px;}
+  .foot-grid{display:flex;justify-content:space-between;flex-wrap:wrap;gap:24px;font-size:0.88rem;}
+  .foot-grid a{opacity:0.8;}
+  .foot-grid a:hover{opacity:1;text-decoration:underline;}
+  .fine{margin-top:34px;font-family:'Space Mono',monospace;font-size:0.72rem;opacity:0.5;}
+
+  @media (max-width:900px){
+    .about-grid,.visit-grid{grid-template-columns:1fr;gap:40px;}
+    .navlinks{display:none;}
+    .menutoggle{display:block;}
+  }
+</style>
+</head>
+<body>
+
+<header>
+  <div class="nav">
+    <div class="logo">Pandaisia <span>·</span> Beach Bar</div>
+    <nav class="navlinks">
+      <a href="#about">About</a>
+      <a href="#menu">Menu</a>
+      <a href="#reviews">Reviews</a>
+      <a href="#visit">Visit</a>
+    </nav>
+    <a class="navbtn" href="tel:+302271071010">Call · 22710 71010</a>
+  </div>
+</header>
+
+<section class="hero">
+  <div class="sun"></div>
+  <div class="wrap hero-inner">
+    <span class="eyebrow">Komi Beach · Chios</span>
+    <h1>Sand between<br>your toes, <em>pizza</em><br>in the oven.</h1>
+    <p class="hero-sub">A family‑run beach bar on Komi's shoreline — free sunbeds, hand‑stretched pizza dough, and a mastiha mojito that regulars drive across the island for.</p>
+    <div class="hero-ctas">
+      <a class="btn btn-primary" href="#menu">View the menu</a>
+      <a class="btn btn-ghost" href="https://www.google.com/maps/search/?api=1&query=Pandaisia+Beach+Bar+Komi+Chios" target="_blank" rel="noopener">Get directions</a>
+    </div>
+    <div class="stat-row">
+      <div class="stat"><b>4.6★</b><span>GOOGLE · 852 REVIEWS</span></div>
+      <div class="stat"><b>4.7★</b><span>TRIPADVISOR</span></div>
+      <div class="stat"><b>3 AM</b><span>OPEN UNTIL, DAILY</span></div>
+      <div class="stat"><b>€0</b><span>SUNBEDS &amp; UMBRELLAS</span></div>
+    </div>
+  </div>
+</section>
+<div class="xysta"></div>
+
+<section id="about">
+  <div class="wrap about-grid">
+    <div>
+      <span class="eyebrow">Our story</span>
+      <h2>Run by the family that pours your coffee.</h2>
+      <div class="about-copy">
+        <p>Pandaisia sits right on the sand at Komi, on Chios' southeast coast — the kind of place people mean to stop at for a coffee and end up staying for lunch, then sunset. Christos and Smaro keep the pass moving and the sunbeds free, no minimum spend required.</p>
+        <p>The dough is made in‑house every morning, which is why the pizza keeps showing up at the top of "best on the island" lists. Everything else — the frappes, the mastiha cocktails, the waffles — follows the same rule: simple, fresh, and unhurried.</p>
+      </div>
+    </div>
+    <div class="about-figures">
+      <div class="fig"><b>852</b><span>Google reviews, 4.6 average</span></div>
+      <div class="fig"><b>#1</b><span>Rated pizza spot in Komi</span></div>
+      <div class="fig"><b>1.5–4h</b><span>Typical time guests stay</span></div>
+      <div class="fig"><b>Daily</b><span>Homemade dough &amp; sauces</span></div>
+    </div>
+  </div>
+</section>
+<div class="xysta"></div>
+
+<section id="menu">
+  <div class="wrap">
+    <div class="section-head">
+      <span class="eyebrow">What's on the pass</span>
+      <h2>The menu</h2>
+    </div>
+
+    <div class="menu-tabs">
+      <button class="tab-btn active" data-tab="coffee">Coffee &amp; Frappe</button>
+      <button class="tab-btn" data-tab="pizza">Pizza</button>
+      <button class="tab-btn" data-tab="mains">Salads &amp; Mains</button>
+      <button class="tab-btn" data-tab="sweets">Waffles &amp; Sweets</button>
+      <button class="tab-btn" data-tab="drinks">Cocktails &amp; Drinks</button>
+    </div>
+
+    <div class="menu-panel active" id="coffee">
+      <div class="menu-list">
+        <div class="menu-item"><div><h4>Freddo Espresso</h4><p>Double shot, shaken over ice.</p></div><div class="price">€3</div></div>
+        <div class="menu-item"><div><h4>Freddo Cappuccino</h4><p>Iced espresso with cold whipped milk foam.</p></div><div class="price">€3.50</div></div>
+        <div class="menu-item"><div><h4>Frappé</h4><p>Greece's classic whipped instant‑coffee cooler.</p></div><div class="price">€3</div></div>
+        <div class="menu-item"><div><h4>Greek Coffee</h4><p>Slow‑brewed in the briki, served with water.</p></div><div class="price">€2.50</div></div>
+        <div class="menu-item"><div><h4>Fresh Orange Juice</h4><p>Squeezed to order.</p></div><div class="price">€4</div></div>
+        <div class="menu-item"><div><h4>Chamomile &amp; Herbal Teas</h4><p>A quiet after‑lunch option.</p></div><div class="price">€2.50</div></div>
+      </div>
+    </div>
+
+    <div class="menu-panel" id="pizza">
+      <div class="menu-list">
+        <div class="menu-item"><div><h4>Pizza Pandaisia</h4><p>The house signature — the one people come back for.</p></div><div class="price">€10</div></div>
+        <div class="menu-item"><div><h4>Pizza Theiki ("Divine")</h4><p>A loaded, four‑cheese leaning specialty pie.</p></div><div class="price">€11</div></div>
+        <div class="menu-item"><div><h4>Margherita</h4><p>Tomato, mozzarella, fresh basil.</p></div><div class="price">€8</div></div>
+        <div class="menu-item"><div><h4>Pizza with Beer‑Cured Toppings</h4><p>A beer‑forward take built for pairing with a cold one.</p></div><div class="price">€10.50</div></div>
+        <div class="menu-item"><div><h4>Vegetarian Garden Pizza</h4><p>Seasonal vegetables, olives, feta.</p></div><div class="price">€9.50</div></div>
+        <div class="menu-item"><div><h4>Prosciutto &amp; Rocket</h4><p>Cured ham, wild rocket, shaved parmesan.</p></div><div class="price">€11.50</div></div>
+      </div>
+    </div>
+
+    <div class="menu-panel" id="mains">
+      <div class="menu-list">
+        <div class="menu-item"><div><h4>Greek Salad</h4><p>Tomato, cucumber, onion, olives, feta block.</p></div><div class="price">€7.50</div></div>
+        <div class="menu-item"><div><h4>Caesar Salad</h4><p>Grilled chicken, parmesan, croutons.</p></div><div class="price">€8.50</div></div>
+        <div class="menu-item"><div><h4>Strawberry Salad</h4><p>Leaves, strawberry, feta, walnut — a lighter start.</p></div><div class="price">€8</div></div>
+        <div class="menu-item"><div><h4>Burger Special</h4><p>House patty, fries, the works.</p></div><div class="price">€10.50</div></div>
+        <div class="menu-item"><div><h4>Club Sandwich</h4><p>Chicken, bacon, egg, toasted.</p></div><div class="price">€8.50</div></div>
+        <div class="menu-item"><div><h4>Grilled Tortilla Wraps</h4><p>Chicken or vegetarian, with a side of fries.</p></div><div class="price">€8</div></div>
+        <div class="menu-item"><div><h4>Beach Omelette</h4><p>Three eggs, your choice of filling.</p></div><div class="price">€6.50</div></div>
+        <div class="menu-item"><div><h4>Fries</h4><p>Crisp, salted, made to share.</p></div><div class="price">€4</div></div>
+      </div>
+    </div>
+
+    <div class="menu-panel" id="sweets">
+      <div class="menu-list">
+        <div class="menu-item"><div><h4>Stracciatella &amp; Hazelnut Waffle</h4><p>Warm waffle, ice cream, chocolate‑hazelnut spread, biscuit crumb.</p></div><div class="price">€7</div></div>
+        <div class="menu-item"><div><h4>Classic Belgian Waffle</h4><p>Whipped cream, seasonal fruit, syrup.</p></div><div class="price">€6.50</div></div>
+        <div class="menu-item"><div><h4>Ice Cream Coupe</h4><p>Three scoops, your pick of flavors.</p></div><div class="price">€5.50</div></div>
+        <div class="menu-item"><div><h4>Crêpe Nutella</h4><p>Folded, warm, generous.</p></div><div class="price">€6</div></div>
+      </div>
+    </div>
+
+    <div class="menu-panel" id="drinks">
+      <div class="menu-list">
+        <div class="menu-item"><div><h4>Mastiha Mojito</h4><p>The one guests specifically drive back for.</p></div><div class="price">€8</div></div>
+        <div class="menu-item"><div><h4>Zombie Cocktail</h4><p>Tropical, layered, not for a quiet afternoon.</p></div><div class="price">€9</div></div>
+        <div class="menu-item"><div><h4>Mastiha &amp; Ginger Soda</h4><p>A local, non‑alcoholic house specialty.</p></div><div class="price">€4</div></div>
+        <div class="menu-item"><div><h4>Draft &amp; Bottled Beer</h4><p>Local and imported options.</p></div><div class="price">€4–5</div></div>
+        <div class="menu-item"><div><h4>Aperol Spritz</h4><p>Classic, over ice, on the sand.</p></div><div class="price">€8</div></div>
+        <div class="menu-item"><div><h4>House Wine, Glass</h4><p>Local white, rosé, or red.</p></div><div class="price">€4.50</div></div>
+      </div>
+    </div>
+
+    <p class="menu-note">Prices are indicative and vary by season — ask the team for the current board when you sit down.</p>
+  </div>
+</section>
+
+<div class="xysta on-dark"></div>
+<section id="reviews" class="reviews-strip">
+  <div class="wrap">
+    <div class="section-head">
+      <span class="eyebrow">852 Google reviews · 4.6 average</span>
+      <h2>What people say after a day here</h2>
+    </div>
+    <div class="review-grid">
+      <div class="review-card">
+        <div class="review-stars">★★★★★</div>
+        <p>Called it the best day they'd spent in Komi — warm owners, plenty of free sunbeds, and pizza they ranked among the best on the island.</p>
+        <footer>GOOGLE REVIEWER · 2 WEEKS AGO</footer>
+      </div>
+      <div class="review-card">
+        <div class="review-stars">★★★★★</div>
+        <p>Praised the attentive, friendly service and singled out the homemade pizza as the highlight of their visit to Chios.</p>
+        <footer>GOOGLE REVIEWER · 3 WEEKS AGO</footer>
+      </div>
+      <div class="review-card">
+        <div class="review-stars">★★★★★</div>
+        <p>A Tripadvisor traveler called their mojito the best they'd had since Cuba, and credited the staff's warmth for making the visit memorable.</p>
+        <footer>TRIPADVISOR TRAVELER</footer>
+      </div>
+      <div class="review-card">
+        <div class="review-stars">★★★★★</div>
+        <p>Noted the generous portions, efficient staff, and a stracciatella‑hazelnut waffle they'd order again without hesitation.</p>
+        <footer>TRIPADVISOR TRAVELER</footer>
+      </div>
+      <div class="review-card">
+        <div class="review-stars">★★★★☆</div>
+        <p>Appreciated that sunbeds, umbrellas, and parking stay free with no pressure to order more than a coffee.</p>
+        <footer>TRIPADVISOR TRAVELER</footer>
+      </div>
+      <div class="review-card">
+        <div class="review-stars">★★★★★</div>
+        <p>Called it a well‑organized spot on a beautiful sandy beach, with standout cocktails alongside the pizza.</p>
+        <footer>TRIPADVISOR TRAVELER</footer>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section id="visit">
+  <div class="wrap visit-grid">
+    <div>
+      <span class="eyebrow">Plan your visit</span>
+      <h2>Find us on the sand</h2>
+      <table class="hours-table">
+        <tr><td>Monday – Sunday</td><td>9:00 AM – 3:00 AM</td></tr>
+      </table>
+      <ul class="contact-list">
+        <li><span class="lbl">ADDRESS</span> Komi Beach, 821 00, Chios, Greece</li>
+        <li><span class="lbl">PHONE</span> <a href="tel:+302271071010">22710 71010</a></li>
+        <li><span class="lbl">INSTAGRAM</span> <a href="https://instagram.com/pandaisiabeachbar" target="_blank" rel="noopener">@pandaisiabeachbar</a></li>
+        <li><span class="lbl">FACEBOOK</span> <a href="https://www.facebook.com/" target="_blank" rel="noopener">Pandaisia Beach Bar // Komi</a></li>
+      </ul>
+    </div>
+    <div class="map-card">
+      <svg viewBox="0 0 400 340" preserveAspectRatio="xMidYMid slice" xmlns="http://www.w3.org/2000/svg">
+        <path d="M0 260 Q100 220 200 250 T400 230 V340 H0 Z" fill="#E8A93C" opacity="0.5"/>
+        <path d="M0 290 Q120 260 220 285 T400 270 V340 H0 Z" fill="#F3ECD9" opacity="0.4"/>
+      </svg>
+      <div class="map-card-content">
+        <div class="pin"></div>
+        <h3 style="color:#FDFBF6;font-size:1.4rem;">Komi Beach, Chios</h3>
+        <p style="max-width:280px;color:#EFE6CE;font-size:0.92rem;">South‑east coast of Chios, about a 30‑minute drive from Chios Town. Look for the sunbeds — you can't miss them.</p>
+      </div>
+      <a class="btn btn-primary" style="align-self:flex-start;position:relative;z-index:2;" href="https://www.google.com/maps/search/?api=1&query=Pandaisia+Beach+Bar+Komi+Chios" target="_blank" rel="noopener">Open in Google Maps</a>
+    </div>
+  </div>
+</section>
+
+<div class="xysta"></div>
+<footer>
+  <div class="wrap">
+    <div class="foot-grid">
+      <div class="logo" style="color:#F3ECD9;">Pandaisia <span style="color:var(--sun);">·</span> Beach Bar</div>
+      <div><a href="#about">About</a> &nbsp;·&nbsp; <a href="#menu">Menu</a> &nbsp;·&nbsp; <a href="#reviews">Reviews</a> &nbsp;·&nbsp; <a href="#visit">Visit</a></div>
+      <div><a href="tel:+302271071010">22710 71010</a></div>
+    </div>
+    <div class="fine">Komi Beach, Chios, Greece · Menu items and pricing shown are indicative — please confirm with staff on the day.</div>
+  </div>
+</footer>
+
+<script>
+  document.querySelectorAll('.tab-btn').forEach(btn=>{
+    btn.addEventListener('click',()=>{
+      document.querySelectorAll('.tab-btn').forEach(b=>b.classList.remove('active'));
+      document.querySelectorAll('.menu-panel').forEach(p=>p.classList.remove('active'));
+      btn.classList.add('active');
+      document.getElementById(btn.dataset.tab).classList.add('active');
+    });
+  });
+</script>
+
+</body>
+</html>
